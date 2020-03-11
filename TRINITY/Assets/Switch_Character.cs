@@ -7,9 +7,13 @@ public class Switch_Character : MonoBehaviour {
     // References to Controlled game objects
 
 
-    public GameObject ninja, arquero, fighter;
+    //public GameObject ninja, arquero, fighter;
+    public GameObject[] chars;
+    private int ninja = 0, arquero = 1, fighter = 2;
 
-    int wichAvatarIsOn = 0;
+    public Vector2 pos;
+
+    int avatarActive = 0;
 
 
 
@@ -17,51 +21,24 @@ public class Switch_Character : MonoBehaviour {
     // Start is called before the first frame update
     void Start()
     {
-
+        /*chars[0] = ninja; chars[1] = arquero; chars[2] = fighter;
         ninja.gameObject.SetActive(true);
         arquero.gameObject.SetActive(false);
         fighter.gameObject.SetActive(false);
-
+        */
+        pos = transform.position;
+        changeChar(ninja);
+        
     }
 
-
-
-
-
-    public void SwitchCharcter()
+    private void changeChar(int n)
     {
-
-        switch (wichAvatarIsOn)
-        {
-
-            case 0:
-                wichAvatarIsOn = 1;
-                ninja.gameObject.SetActive(false);
-                arquero.gameObject.SetActive(true);
-                fighter.gameObject.SetActive(false);
-               Task.Delay(500);
-                break;
-            case 1:
-                wichAvatarIsOn = 2;
-                ninja.gameObject.SetActive(false);
-                arquero.gameObject.SetActive(false);
-                fighter.gameObject.SetActive(true);
-                Task.Delay(500);
-                break;
-            case 2:
-                wichAvatarIsOn = 0;
-                ninja.gameObject.SetActive(true);
-                arquero.gameObject.SetActive(false);
-                fighter.gameObject.SetActive(false);
-                Task.Delay(500);
-                break;
-                
-
-        }
-
-
-
-
+        //Task.Delay(500);
+        if (n > 2) n = 0;
+        chars[0].SetActive(false); chars[1].SetActive(false); chars[2].SetActive(false);
+        chars[0].transform.position = pos;
+        chars[n].transform.position = pos; chars[n].SetActive(true); 
+        avatarActive = n;
     }
 
 
@@ -71,11 +48,9 @@ public class Switch_Character : MonoBehaviour {
     void Update()
     {
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            SwitchCharcter();
-
-
+            changeChar(avatarActive + 1);
         }
 
     }
