@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ninja : MonoBehaviour
 {
-
+    bool isatak = false;
+    bool animationjump = false;
     bool canJump;
     //   ATTACK
 
@@ -22,61 +23,94 @@ public class ninja : MonoBehaviour
     {
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
         //GetComponentInParent<Transform>().transform.position = transform.position;
-        if (Input.GetKey("a")) { 
+        if (Input.GetKey("a")) {
 
-        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime,0));
-            gameObject.GetComponent<Animator>().SetBool("moving", true);
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            if (isatak == false)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Animator>().SetBool("moving", true);
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            if (isatak == true)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+                gameObject.GetComponent<Animator>().SetBool("moving", false); //posar animacio menters corre i ataka
+
+            }
         }
 
 
         if (Input.GetKey("d"))
         {
+            if (isatak == false){
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Animator>().SetBool("moving", true);
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+            if (isatak == true)
+            {
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Animator>().SetBool("moving", false);
 
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
-            gameObject.GetComponent<Animator>().SetBool("moving", true);
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
 
         if(!Input.GetKey("a") && !Input.GetKey("d"))
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
-            gameObject.GetComponent<Animator>().SetBool("jump", true);
-        }
+
+          }
 
         if (Input.GetKey("space") && canJump)
         {
-            canJump = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
+            
+                canJump = false;
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
+                animationjump = true;
            
+
         }
 
-        if (Input.GetKey("space") && Input.GetKey("d") && canJump)
+        if (animationjump) { gameObject.GetComponent<Animator>().SetBool("jump", true); }
+        else gameObject.GetComponent<Animator>().SetBool("jump", false);
+
+        if (isatak) { gameObject.GetComponent<Animator>().SetBool("attack", true); }
+        else gameObject.GetComponent<Animator>().SetBool("attack", false);
+
+
+
+        /*  if (Input.GetKey("space") && Input.GetKey("d") && canJump)
+          {
+              canJump = false;
+              gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,300f));
+              gameObject.GetComponent<Animator>().SetBool("jump", true);
+              gameObject.GetComponent<SpriteRenderer>().flipX = false;
+          }
+          if (Input.GetKey("space") && Input.GetKey("a") && canJump)
+          {
+              canJump = false;
+              gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
+              gameObject.GetComponent<Animator>().SetBool("jump", true);
+              gameObject.GetComponent<SpriteRenderer>().flipX = true;
+          }*/
+
+
+        if (animationjump ==true && isatak == true)
         {
-            canJump = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,300f));
-            gameObject.GetComponent<Animator>().SetBool("jump", true);
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+           
+            animationjump = false;
         }
-        if (Input.GetKey("space") && Input.GetKey("a") && canJump)
-        {
-            canJump = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
-            gameObject.GetComponent<Animator>().SetBool("jump", true);
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        }
-        if (!Input.GetKey("space") && !Input.GetKey("space"))
-        {
-            gameObject.GetComponent<Animator>().SetBool("jump", false);
-        }
+
 
 
         if (TimeAttack <= 0) //Then you can attack
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                gameObject.GetComponent<Animator>().SetBool("attack", true);
-               // gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                isatak = true;
+               
+                // gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 TimeAttack = StartTimeAttack;
             }
 
@@ -88,7 +122,8 @@ public class ninja : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.Mouse0))
         {
-            gameObject.GetComponent<Animator>().SetBool("attack", false);
+           
+            isatak = false;
             
 
         }
@@ -100,9 +135,11 @@ public class ninja : MonoBehaviour
         
         if(collision.transform.tag == "ground")
         {
-            canJump = true;
-        }
 
+            canJump = true;
+            animationjump = false;
+        }
+        
     }
 }
 
