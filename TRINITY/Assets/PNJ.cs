@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ninja : MonoBehaviour
+public class PNJ : MonoBehaviour
 {
 
     bool canJump;
@@ -64,23 +64,7 @@ public class ninja : MonoBehaviour
             gameObject.GetComponent<Animator>().SetBool("jump", false);
         }
 
-        if(TimeAttack<= 0) //Then you can attack
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                gameObject.GetComponent<Animator>().SetBool("attack", true);
-
-            }
-
-
-            TimeAttack = StartTimeAttack;
-
-        }
-        else
-        {
-            TimeAttack -= StartTimeAttack;
-        }
-
+     
 
 
 
@@ -96,10 +80,7 @@ public class ninja : MonoBehaviour
 
     }
 
-    //   ATTACK
-
-    private float TimeAttack;
-    public float StartTimeAttack;
+    
 
 
 

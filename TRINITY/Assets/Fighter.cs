@@ -54,6 +54,7 @@ public class Fighter : MonoBehaviour
             gameObject.GetComponent<Animator>().SetBool("jump", true);
             gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
+
         if (Input.GetKey("space") && Input.GetKey("a") && canJump)
         {
             canJump = false;
@@ -61,6 +62,7 @@ public class Fighter : MonoBehaviour
             gameObject.GetComponent<Animator>().SetBool("jump", true);
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+
         if (!Input.GetKey("space") && !Input.GetKey("space"))
         {
             gameObject.GetComponent<Animator>().SetBool("jump", false);

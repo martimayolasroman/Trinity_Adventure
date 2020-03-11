@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PNJ : MonoBehaviour
+public class ninja : MonoBehaviour
 {
 
     bool canJump;
+    //   ATTACK
+
+    private float TimeAttack;
+    public float StartTimeAttack;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +69,30 @@ public class PNJ : MonoBehaviour
         {
             gameObject.GetComponent<Animator>().SetBool("jump", false);
         }
+
+
+        if (TimeAttack <= 0) //Then you can attack
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                gameObject.GetComponent<Animator>().SetBool("attack", true);
+               // gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                TimeAttack = StartTimeAttack;
+            }
+
+        }
+        else
+        {
+            TimeAttack -= Time.deltaTime;
+        }
+
+        if (!Input.GetKey(KeyCode.Mouse0))
+        {
+            gameObject.GetComponent<Animator>().SetBool("attack", false);
+            
+
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
