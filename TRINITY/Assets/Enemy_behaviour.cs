@@ -12,12 +12,14 @@ public class Enemy_behaviour : MonoBehaviour
     public float attackDistance; //Minimum distance for attack
     public float moveSpeed;
     public float timer; // Timer for cooldown between attacks
+    public Transform leftLimit;
+    public Transform rightLimit;
 
     #endregion
 
     #region Private Variables
     private RaycastHit2D hit;
-    private GameObject target;
+    private Transform target;
     private Animator anim;
     private float distance; //Store the distance between enemy and player
     private bool attackMode;
@@ -28,15 +30,24 @@ public class Enemy_behaviour : MonoBehaviour
 
     void Awake()
     {
+        SelectTarget();
         intTimer = timer; //Store the initial value fo timer
         anim = GetComponent<Animator>();
     }
     // Update is called once per frame
     void Update()
     {
+        if (!attackMode)
+        {
+            Move();
+        }
+        if(!InsideofLimits()&& !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Skeleton_attack"))
+        {
+            SelectTarget();
+        }
         if (inRange)
         {
-            hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, raycastMask);
+            hit = Physics2D.Raycast(rayCast.position, transform.right, rayCastLength, raycastMask);
             RaycastDebugger();
         }
 
@@ -52,7 +63,7 @@ public class Enemy_behaviour : MonoBehaviour
         }
         if(inRange == false)
         {
-            anim.SetBool("canWalk", false);
+        
             StopAttack();
         }
 
@@ -63,17 +74,18 @@ public class Enemy_behaviour : MonoBehaviour
     {
         if(trig.gameObject.tag == "Players")
         {
-            target = trig.gameObject;
+            target = trig.transform;
             inRange = true;
+            Flip();
         }
     }
 
     void EnemyLogic()
     {
-        distance = Vector2.Distance(transform.position, target.transform.position);
+        distance = Vector2.Distance(transform.position, target.position);
 
         if (distance > attackDistance) { 
-        Move();
+        
         StopAttack();
         }
         else if(attackDistance >= distance && cooling == false)
@@ -93,7 +105,7 @@ public class Enemy_behaviour : MonoBehaviour
         anim.SetBool("canWalk", true);
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Skeleton_attack"))
         {
-            Vector2 targetPosition = new Vector2(target.transform.position.x, transform.position.y);
+            Vector2 targetPosition = new Vector2(target.position.x, transform.position.y);
 
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
@@ -134,11 +146,11 @@ public class Enemy_behaviour : MonoBehaviour
     {
         if(distance > attackDistance)
         {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.red);
+            Debug.DrawRay(rayCast.position, transform.right * rayCastLength, Color.red);
 
         }else if(attackDistance > distance)
         {
-            Debug.DrawRay(rayCast.position, Vector2.left * rayCastLength, Color.green);
+            Debug.DrawRay(rayCast.position, transform.right * rayCastLength, Color.green);
         }
 
     }
@@ -148,6 +160,42 @@ public class Enemy_behaviour : MonoBehaviour
         cooling = true;
     }
     
+    private bool InsideofLimits()
+    {
+        return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
+    }
+    private void SelectTarget()
+    {
+        float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
+        float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
+
+        if(distanceToLeft > distanceToRight)
+        {
+            target = leftLimit;
+        }
+        else
+        {
+            target = rightLimit;
+        }
+
+        Flip();
+
+       
+    }
+    private void Flip()
+    {
+        Vector3 rotation = transform.eulerAngles;
+        if(transform.position.x > target.position.x)
+        {
+            rotation.y = 180;
+        }
+        else
+        {
+            rotation.y = 0f;
+        }
+
+        transform.eulerAngles = rotation;
+    }
 
 
 }
