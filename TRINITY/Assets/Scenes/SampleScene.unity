@@ -165,7 +165,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 61113d6a6927ddf49b038cb050adbb79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -803,6 +803,7 @@ GameObject:
   - component: {fileID: 715270309}
   - component: {fileID: 715270308}
   - component: {fileID: 715270310}
+  - component: {fileID: 715270311}
   m_Layer: 8
   m_Name: Arquero
   m_TagString: Players
@@ -818,7 +819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715270305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07, y: 0.182, z: 0}
+  m_LocalPosition: {x: -2.09, y: 0.23, z: 0}
   m_LocalScale: {x: 0.32424, y: 0.37140128, z: 0.8689966}
   m_Children: []
   m_Father: {fileID: 654107392}
@@ -892,7 +893,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &715270309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -931,6 +932,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6253671272f6a584bbf9941f790dbc8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTimeAttack: 0
+--- !u!95 &715270311
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715270305}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 666266ec2aeb0804bb86e9ee8546320d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &720923715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720923715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.021, y: -0.021, z: 0}
+  m_LocalPosition: {x: 1.27, y: 0.02, z: 0}
   m_LocalScale: {x: 0.41909403, y: 0.41841498, z: 1}
   m_Children: []
   m_Father: {fileID: 654107392}
@@ -1042,7 +1063,7 @@ Rigidbody2D:
   m_Mass: 0.8
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.58
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1216,7 +1237,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057863430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.93, y: -2.64, z: 0}
+  m_LocalPosition: {x: -8.9, y: -2.82, z: 0}
   m_LocalScale: {x: 1.1006, y: 1.1006, z: 1.1006}
   m_Children: []
   m_Father: {fileID: 408625805}

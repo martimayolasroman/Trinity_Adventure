@@ -7,6 +7,7 @@ public class ninja : MonoBehaviour
     bool isatak = false;
     bool animationjump = false;
     bool canJump;
+    bool jumpatak = false;
     //   ATTACK
 
     private float TimeAttack;
@@ -72,12 +73,15 @@ public class ninja : MonoBehaviour
 
         }
 
-        if (animationjump) { gameObject.GetComponent<Animator>().SetBool("jump", true); }
+       
+        if (animationjump && !jumpatak) { gameObject.GetComponent<Animator>().SetBool("jump", true); }
         else gameObject.GetComponent<Animator>().SetBool("jump", false);
 
-        if (isatak) { gameObject.GetComponent<Animator>().SetBool("attack", true); }
+        if (isatak && !jumpatak) { gameObject.GetComponent<Animator>().SetBool("attack", true); }
         else gameObject.GetComponent<Animator>().SetBool("attack", false);
 
+        if(jumpatak) { gameObject.GetComponent<Animator>().SetBool("jumpatak", true); }
+        else gameObject.GetComponent<Animator>().SetBool("jumpatak", false);
 
 
         /*  if (Input.GetKey("space") && Input.GetKey("d") && canJump)
@@ -106,6 +110,14 @@ public class ninja : MonoBehaviour
 
         if (TimeAttack <= 0) //Then you can attack
         {
+
+            if (!canJump && Input.GetKey(KeyCode.Mouse0))
+            {
+                jumpatak = true;
+                TimeAttack = StartTimeAttack;
+
+            }
+
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
@@ -124,8 +136,13 @@ public class ninja : MonoBehaviour
         {
            
             isatak = false;
+            jumpatak = false;
             
 
+        }
+        if (!canJump && !jumpatak)
+        {
+            animationjump = true;
         }
 
     }
@@ -138,6 +155,7 @@ public class ninja : MonoBehaviour
 
             canJump = true;
             animationjump = false;
+            jumpatak = false;
         }
         
     }
