@@ -7,6 +7,7 @@ public class bee_bullet_script : MonoBehaviour
     private Transform target;
     public float speed;
     Rigidbody2D bulletRB;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,9 @@ public class bee_bullet_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         
+
     }
+
+   
 }
