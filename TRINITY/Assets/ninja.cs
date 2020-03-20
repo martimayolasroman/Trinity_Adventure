@@ -8,10 +8,15 @@ public class ninja : MonoBehaviour
     bool animationjump = false;
     bool canJump;
     bool jumpatak = false;
+
     //   ATTACK
 
     private float TimeAttack;
     public float StartTimeAttack;
+    public Transform attackPos;
+    public LayerMask whatIoEnemies;
+    public float attackRange;
+
 
     // Start is called before the first frame update
     void Start()
@@ -114,18 +119,20 @@ public class ninja : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-                TimeAttack = StartTimeAttack;
-
+                
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-               
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                TimeAttack = StartTimeAttack;
+                Colider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, atackkRanger, whatIsEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++){
+                    enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
+                }
+              
             }
-
+            TimeAttack = StartTimeAttack;
         }
         else
         {
@@ -158,6 +165,13 @@ public class ninja : MonoBehaviour
             jumpatak = false;
         }
         
+    }
+
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("damage TaKEN !");
     }
 }
 
