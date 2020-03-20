@@ -4,34 +4,41 @@ using UnityEngine;
 
 public class arco : MonoBehaviour
 {
-    public float bulletVelocity = 5f;
-    public GameObject bullet;
-    public GameObject bullet1;
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    private List<GameObject> letters = new List<GameObject>();
+    public GameObject letterPrefab;
+    public float letterVelocity;
+    Vector3 direction;
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        direction = Input.mousePosition;
+        direction.z = 0.0f;
+        direction = Camera.main.ScreenToWorldPoint(direction);
+        direction = direction - transform.position;
+        if (Input.GetMouseButtonDown(0))
         {
-            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (Vector2)((worldMousePos - transform.position));
-            direction.Normalize();
-            // Creates the bullet locally
-            GameObject bullet = (GameObject)Instantiate(
-                                    bullet1,
-                                    transform.position + (Vector3)(direction * 0.5f),
-                                    Quaternion.identity);
-            // Adds velocity to the bullet
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
+            GameObject letter = (GameObject)Instantiate(letterPrefab, transform.position, Quaternion.identity);
+            letters.Add(letter);
+        }
+        for (int i = 0; i < letters.Count; i++)
+        {
+            GameObject goLetter = letters[i];
+            if (goLetter != null)
+            {
+                goLetter.transform.Translate(direction * Time.deltaTime * letterVelocity);
+                Vector3 letterScreenPosition = Camera.main.WorldToScreenPoint(goLetter.transform.position);
+                if (letterScreenPosition.y >= Screen.height || letterScreenPosition.y <= 0 || letterScreenPosition.x >= Screen.width - 20 || letterScreenPosition.x <= -20)
+                {
+                    DestroyObject(goLetter);
+                    letters.Remove(goLetter);
+                }
+            }
         }
     }
 
 
 }
+
+
+
     
 
