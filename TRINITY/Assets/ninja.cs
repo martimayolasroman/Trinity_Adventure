@@ -14,8 +14,9 @@ public class ninja : MonoBehaviour
     private float TimeAttack;
     public float StartTimeAttack;
     public Transform attackPos;
-    public LayerMask whatIoEnemies;
+    public LayerMask whatIsEnemies;
     public float attackRange;
+    public int damage;
 
 
     // Start is called before the first frame update
@@ -29,7 +30,8 @@ public class ninja : MonoBehaviour
     {
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
         //GetComponentInParent<Transform>().transform.position = transform.position;
-        if (Input.GetKey("a")) {
+        if (Input.GetKey("a"))
+        {
 
             if (isatak == false)
             {
@@ -49,7 +51,8 @@ public class ninja : MonoBehaviour
 
         if (Input.GetKey("d"))
         {
-            if (isatak == false){
+            if (isatak == false)
+            {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
                 gameObject.GetComponent<Animator>().SetBool("moving", true);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -62,30 +65,30 @@ public class ninja : MonoBehaviour
             }
         }
 
-        if(!Input.GetKey("a") && !Input.GetKey("d"))
+        if (!Input.GetKey("a") && !Input.GetKey("d"))
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
 
-          }
+        }
 
         if (Input.GetKey("space") && canJump)
         {
-            
-                canJump = false;
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
-                animationjump = true;
-           
+
+            canJump = false;
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
+            animationjump = true;
+
 
         }
 
-       
+
         if (animationjump && !jumpatak) { gameObject.GetComponent<Animator>().SetBool("jump", true); }
         else gameObject.GetComponent<Animator>().SetBool("jump", false);
 
         if (isatak && !jumpatak) { gameObject.GetComponent<Animator>().SetBool("attack", true); }
         else gameObject.GetComponent<Animator>().SetBool("attack", false);
 
-        if(jumpatak) { gameObject.GetComponent<Animator>().SetBool("jumpatak", true); }
+        if (jumpatak) { gameObject.GetComponent<Animator>().SetBool("jumpatak", true); }
         else gameObject.GetComponent<Animator>().SetBool("jumpatak", false);
 
 
@@ -105,9 +108,9 @@ public class ninja : MonoBehaviour
           }*/
 
 
-        if (animationjump ==true && isatak == true)
+        if (animationjump == true && isatak == true)
         {
-           
+
             animationjump = false;
         }
 
@@ -119,18 +122,20 @@ public class ninja : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-                
+
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                Colider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, atackkRanger, whatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++){
-                    enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
                 }
-              
+
             }
             TimeAttack = StartTimeAttack;
         }
@@ -141,10 +146,10 @@ public class ninja : MonoBehaviour
 
         if (!Input.GetKey(KeyCode.Mouse0))
         {
-           
+
             isatak = false;
             jumpatak = false;
-            
+
 
         }
         if (!canJump && !jumpatak)
@@ -156,23 +161,26 @@ public class ninja : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if(collision.transform.tag == "ground")
+
+        if (collision.transform.tag == "ground")
         {
 
             canJump = true;
             animationjump = false;
             jumpatak = false;
         }
-        
     }
 
+        private void OnDrawGizmosSelected()
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        Debug.Log("damage TaKEN !");
-    }
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        }
+
+    
+
+
 }
 
 

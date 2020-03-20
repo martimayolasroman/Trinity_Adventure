@@ -14,6 +14,7 @@ public class Enemy_behaviour : MonoBehaviour
     public float timer; // Timer for cooldown between attacks
     public Transform leftLimit;
     public Transform rightLimit;
+    public int health;
 
     #endregion
 
@@ -37,11 +38,20 @@ public class Enemy_behaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            
+        }
+    
+
+
         if (!attackMode)
         {
             Move();
         }
-        if(!InsideofLimits()&& !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Skeleton_attack"))
+        if (!InsideofLimits() && !inRange && !anim.GetCurrentAnimatorStateInfo(0).IsName("Skeleton_attack"))
         {
             SelectTarget();
         }
@@ -53,26 +63,27 @@ public class Enemy_behaviour : MonoBehaviour
 
         //When PLayer is detected
 
-        if(hit.collider != null)
+        if (hit.collider != null)
         {
             EnemyLogic();
 
-        }else if(hit.collider == null)
+        }
+        else if (hit.collider == null)
         {
             inRange = false;
         }
-        if(inRange == false)
+        if (inRange == false)
         {
-        
+
             StopAttack();
         }
 
-        
+
     }
 
     void OnTriggerEnter2D(Collider2D trig)
     {
-        if(trig.gameObject.tag == "Players")
+        if (trig.gameObject.tag == "Players")
         {
             target = trig.transform;
             inRange = true;
@@ -84,11 +95,12 @@ public class Enemy_behaviour : MonoBehaviour
     {
         distance = Vector2.Distance(transform.position, target.position);
 
-        if (distance > attackDistance) { 
-        
-        StopAttack();
+        if (distance > attackDistance)
+        {
+
+            StopAttack();
         }
-        else if(attackDistance >= distance && cooling == false)
+        else if (attackDistance >= distance && cooling == false)
         {
             Attack();
         }
@@ -100,7 +112,7 @@ public class Enemy_behaviour : MonoBehaviour
         }
     }
 
-   void Move()
+    void Move()
     {
         anim.SetBool("canWalk", true);
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Skeleton_attack"))
@@ -116,8 +128,8 @@ public class Enemy_behaviour : MonoBehaviour
         timer = intTimer; // Reset Timer when PLayer enter Attack Range
         attackMode = true; // To check if Enemy can still attack of not
 
-        anim.SetBool("CanWalk", false); 
-        anim.SetBool("Attack", true); 
+        anim.SetBool("CanWalk", false);
+        anim.SetBool("Attack", true);
 
     }
 
@@ -126,7 +138,7 @@ public class Enemy_behaviour : MonoBehaviour
 
         timer -= Time.deltaTime;
 
-        if(timer <= 0 && cooling && attackMode)
+        if (timer <= 0 && cooling && attackMode)
         {
             cooling = false;
             timer = intTimer;
@@ -134,7 +146,7 @@ public class Enemy_behaviour : MonoBehaviour
 
 
     }
-    
+
     void StopAttack()
     {
         cooling = false;
@@ -144,11 +156,12 @@ public class Enemy_behaviour : MonoBehaviour
 
     void RaycastDebugger()
     {
-        if(distance > attackDistance)
+        if (distance > attackDistance)
         {
             Debug.DrawRay(rayCast.position, transform.right * rayCastLength, Color.red);
 
-        }else if(attackDistance > distance)
+        }
+        else if (attackDistance > distance)
         {
             Debug.DrawRay(rayCast.position, transform.right * rayCastLength, Color.green);
         }
@@ -159,7 +172,7 @@ public class Enemy_behaviour : MonoBehaviour
     {
         cooling = true;
     }
-    
+
     private bool InsideofLimits()
     {
         return transform.position.x > leftLimit.position.x && transform.position.x < rightLimit.position.x;
@@ -169,7 +182,7 @@ public class Enemy_behaviour : MonoBehaviour
         float distanceToLeft = Vector2.Distance(transform.position, leftLimit.position);
         float distanceToRight = Vector2.Distance(transform.position, rightLimit.position);
 
-        if(distanceToLeft > distanceToRight)
+        if (distanceToLeft > distanceToRight)
         {
             target = leftLimit;
         }
@@ -180,12 +193,12 @@ public class Enemy_behaviour : MonoBehaviour
 
         Flip();
 
-       
+
     }
     private void Flip()
     {
         Vector3 rotation = transform.eulerAngles;
-        if(transform.position.x > target.position.x)
+        if (transform.position.x > target.position.x)
         {
             rotation.y = 180;
         }
@@ -197,5 +210,14 @@ public class Enemy_behaviour : MonoBehaviour
         transform.eulerAngles = rotation;
     }
 
+    public void TakeDamage(int damage)
+    {
+        Debug.Log(damage);
+        Debug.Log(health);
+        health -= damage;
+        Debug.Log("damage TaKEN !");
+       
+    }
 
 }
+

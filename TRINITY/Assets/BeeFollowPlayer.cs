@@ -14,6 +14,7 @@ public class BeeFollowPlayer : MonoBehaviour
     private float nextFireTime;
     public GameObject bullet;
     public GameObject bulletParent;
+    public int health;
     
 
 
@@ -27,7 +28,15 @@ public class BeeFollowPlayer : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+        
     {
+
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+
+        }
         positiondetector();
         float distanceFromPlayer = Vector2.Distance( Players.position, transform.position);
         if(distanceFromPlayer < lineofSite && distanceFromPlayer > shootingRange ) {
@@ -64,5 +73,11 @@ public class BeeFollowPlayer : MonoBehaviour
         }
 
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("damage TaKEN !");
     }
 }
