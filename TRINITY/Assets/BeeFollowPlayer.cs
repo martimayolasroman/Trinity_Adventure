@@ -77,7 +77,10 @@ public class BeeFollowPlayer : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log(damage);
+        Debug.Log(health);
         health -= damage;
-        Debug.Log("damage TaKEN !");
+        Debug.Log("damage TaKEN BEE!");
+
     }
 }

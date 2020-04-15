@@ -9,7 +9,8 @@ public class DashMove : MonoBehaviour
     private float dashTime;
     public float startDashTime;
     private int direction;
-
+    public float cooldownTime = 2;
+    private float nextDashTIme = 0;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,10 +29,12 @@ public class DashMove : MonoBehaviour
             //{
             //    direction = 2;
             //}
+           if(Time.time > nextDashTIme) { 
            if (Input.GetKeyDown(KeyCode.E))
             {
                 direction = 3;
-
+                    nextDashTIme = Time.time + cooldownTime;
+            }
             }
             //else if (Input.GetKeyDown(KeyCode.S))
             //{

@@ -122,7 +122,13 @@ public class ninja : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                        enemiesToDamage[i].GetComponent<Ghost>().TakeDamage(damage);
+                }
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
@@ -134,6 +140,7 @@ public class ninja : MonoBehaviour
                 {
                     enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
                     enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                    enemiesToDamage[i].GetComponent<Ghost>().TakeDamage(damage);
                 }
 
             }
