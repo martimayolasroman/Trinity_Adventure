@@ -24,13 +24,13 @@ public class Fighter : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+  public  void Start()
     {
         //GetComponent<ScriptName>().miau();
     }
 
     // Update is called once per frame
-    void Update()
+  public  void Update()
     {
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
         //GetComponentInParent<Transform>().transform.position = transform.position;
