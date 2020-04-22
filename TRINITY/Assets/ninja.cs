@@ -22,14 +22,14 @@ public class ninja : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //GetComponent<ScriptName>().miau();
     }
 
     // Update is called once per frame
     void Update()
     {
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
-        
+        //GetComponentInParent<Transform>().transform.position = transform.position;
         if (Input.GetKey("a"))
         {
 
@@ -43,7 +43,7 @@ public class ninja : MonoBehaviour
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
-                gameObject.GetComponent<Animator>().SetBool("moving", false); 
+                gameObject.GetComponent<Animator>().SetBool("moving", false); //posar animacio menters corre i ataka
 
             }
         }
