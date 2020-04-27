@@ -15,7 +15,8 @@ public class Enemy_behaviour : MonoBehaviour
     public Transform leftLimit;
     public Transform rightLimit;
     public int health;
-
+    public GameObject bloodEffect;
+    
     #endregion
 
     #region Private Variables
@@ -212,6 +213,7 @@ public class Enemy_behaviour : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         Debug.Log(damage);
         Debug.Log(health);
         health -= damage;

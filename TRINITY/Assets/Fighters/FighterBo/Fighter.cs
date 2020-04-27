@@ -124,11 +124,18 @@ public class Fighter : MonoBehaviour
             {
                 jumpatak = true;
                 TimeAttack = StartTimeAttack;
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
+                //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
+                //for (int i = 0; i < enemiesToDamage.Length; i++)
+                //{
+                //    enemiesToDamage[i].GetComponent<Enemy_behaviour >().TakeDamage(damage);
+                //    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                //}
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                if (hitInfo.collider.CompareTag("Enemy"))
                 {
-                    enemiesToDamage[i].GetComponent<Enemy_behaviour >().TakeDamage(damage);
-                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
                 }
             }
 
@@ -137,12 +144,20 @@ public class Fighter : MonoBehaviour
                 isatak = true;
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
+                //for (int i = 0; i < enemiesToDamage.Length; i++)
+                //{
+                //    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                //    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                //}
+
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                if (hitInfo.collider.CompareTag("Enemy"))
                 {
-                    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
                 }
-               
+
 
 
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;

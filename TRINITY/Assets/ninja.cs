@@ -17,6 +17,7 @@ public class ninja : MonoBehaviour
     public LayerMask whatIsEnemies;
     public float attackRange;
     public int damage;
+    public float distance;
 
 
     // Start is called before the first frame update
@@ -122,25 +123,24 @@ public class ninja : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                if (hitInfo.collider.CompareTag("Enemy"))
                 {
-                    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                        enemiesToDamage[i].GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
                 }
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-                // gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for (int i = 0; i < enemiesToDamage.Length; i++)
+                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                if (hitInfo.collider.CompareTag("Enemy"))
                 {
-                    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                    enemiesToDamage[i].GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
                 }
 
             }

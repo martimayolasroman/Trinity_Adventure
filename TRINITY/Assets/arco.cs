@@ -8,6 +8,7 @@ public class arco : MonoBehaviour
     public GameObject letterPrefab;
     public float letterVelocity;
     Vector3 direction;
+
     void Update()
     {
         direction = Input.mousePosition;
