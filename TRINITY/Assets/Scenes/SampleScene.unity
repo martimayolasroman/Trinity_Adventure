@@ -1529,10 +1529,10 @@ Transform:
   m_LocalPosition: {x: -1.71, y: -2.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 720923717}
   - {fileID: 715270306}
   - {fileID: 1284023403}
   - {fileID: 1500087213}
+  - {fileID: 720923717}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1653,6 +1653,7 @@ GameObject:
   - component: {fileID: 715270310}
   - component: {fileID: 715270313}
   - component: {fileID: 715270312}
+  - component: {fileID: 715270311}
   m_Layer: 8
   m_Name: Arquero
   m_TagString: Players
@@ -1674,7 +1675,7 @@ Transform:
   - {fileID: 838904155}
   - {fileID: 1089841162}
   m_Father: {fileID: 654107392}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &715270307
 SpriteRenderer:
@@ -1784,6 +1785,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartTimeAttack: 0
+--- !u!95 &715270311
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715270305}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 666266ec2aeb0804bb86e9ee8546320d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &715270312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,6 +1855,7 @@ GameObject:
   - component: {fileID: 720923719}
   - component: {fileID: 720923718}
   - component: {fileID: 720923722}
+  - component: {fileID: 720923721}
   m_Layer: 8
   m_Name: ninja
   m_TagString: Players
@@ -1898,13 +1919,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720923715}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1, y: -0.2, z: 0}
+  m_LocalPosition: {x: -2.1, y: -0.20000005, z: 0}
   m_LocalScale: {x: 0.41909403, y: 0.41841498, z: 1}
   m_Children:
   - {fileID: 1520814968}
   - {fileID: 1942853828}
   m_Father: {fileID: 654107392}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &720923718
 MonoBehaviour:
@@ -1972,6 +1993,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.3128705, y: 4.41}
   m_EdgeRadius: 0
+--- !u!95 &720923721
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720923715}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6071ffa754d835742b1c318a0ddc7952, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &720923722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,6 +2167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8003b5cfd8ffa24b87f745146337451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  letterPrefab: {fileID: 0}
+  letterVelocity: 0
 --- !u!1 &846782292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,6 +3886,7 @@ GameObject:
   - component: {fileID: 1284023408}
   - component: {fileID: 1284023407}
   - component: {fileID: 1284023409}
+  - component: {fileID: 1284023406}
   m_Layer: 8
   m_Name: fighter
   m_TagString: Players
@@ -3865,7 +3908,7 @@ Transform:
   - {fileID: 1921662957}
   - {fileID: 1692062596}
   m_Father: {fileID: 654107392}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1284023404
 SpriteRenderer:
@@ -3934,6 +3977,25 @@ MonoBehaviour:
     m_Bits: 512
   attackRange: 1.11
   damage: 1
+--- !u!95 &1284023406
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284023402}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c43f60d2c871834490ccd250975a0f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &1284023407
 Rigidbody2D:
   serializedVersion: 4
@@ -4677,7 +4739,7 @@ Transform:
   - {fileID: 1356377613}
   - {fileID: 846782293}
   m_Father: {fileID: 654107392}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1520814967
 GameObject:
