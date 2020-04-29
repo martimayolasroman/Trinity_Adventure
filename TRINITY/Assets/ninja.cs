@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ninja : MonoBehaviour
 {
@@ -21,9 +22,20 @@ public class ninja : MonoBehaviour
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
 
+
+    // LIFE
+
+    public int health;
+    public int numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite EmptyHeart;
+    public float delay = -0.1f;
+
     // Start is called before the first frame update
     void Start()
     {
+        health = numOfHearts;
         //GetComponent<ScriptName>().miau();
         attackTrigguerLeft.enabled = false;
         attackTrigguerRight.enabled = false;
@@ -128,13 +140,7 @@ public class ninja : MonoBehaviour
                 jumpatak = true;
 
 
-                //RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                //if (hitInfo.collider.CompareTag("Enemy"))
-                //{
-                //    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                //    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                //    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                //}
+                
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
             }
@@ -142,13 +148,7 @@ public class ninja : MonoBehaviour
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-                //RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                //if (hitInfo.collider.CompareTag("Enemy"))
-                //{
-                //    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                //    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                //    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                //}
+                
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
 
@@ -175,6 +175,30 @@ public class ninja : MonoBehaviour
             animationjump = true;
         }
 
+        //health
+
+        if (health > numOfHearts) { health = numOfHearts; }
+        if (health == 0)
+        {
+            Die();
+        }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = EmptyHeart;
+            }
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else { hearts[i].enabled = false; }
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -188,16 +212,22 @@ public class ninja : MonoBehaviour
             jumpatak = false;
         }
     }
-
-        //private void OnDrawGizmosSelected()
-
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawWireSphere(attackPos.position, attackRange);
-        //}
-
     
 
+    void Die()
+    {
+
+        gameObject.GetComponent<Animator>().SetBool("Die", true);
+        //Restart the level 
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+
+    }
+
+    public void Damage(int dmg)
+    {
+        health -= dmg;
+    }
 
 }
 

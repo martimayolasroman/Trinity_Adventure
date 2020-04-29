@@ -28,6 +28,7 @@ public class Enemy_behaviour : MonoBehaviour
     private bool inRange; // Check if Plalyer is in range
     private bool cooling; // Check if Enemy is cooling after attack
     private float intTimer;
+    
     #endregion
 
     void Awake()
@@ -36,6 +37,8 @@ public class Enemy_behaviour : MonoBehaviour
         intTimer = timer; //Store the initial value fo timer
         anim = GetComponent<Animator>();
     }
+
+   
     // Update is called once per frame
     void Update()
     {

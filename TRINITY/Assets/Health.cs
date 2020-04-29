@@ -53,8 +53,12 @@ public class Health : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("Die", true);
         //Restart the level 
         //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        
         Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
 
+    }
+
+    public void Damage(int dmg)
+    {
+        health -= dmg;
     }
 }
