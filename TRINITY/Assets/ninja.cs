@@ -21,6 +21,7 @@ public class ninja : MonoBehaviour
     public float distance;
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
+    Switch_Character switchCh;
 
 
     // LIFE
@@ -35,6 +36,8 @@ public class ninja : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        switchCh = gameObject.GetComponent<Switch_Character>();
+
         health = numOfHearts;
         //GetComponent<ScriptName>().miau();
         attackTrigguerLeft.enabled = false;
@@ -219,8 +222,17 @@ public class ninja : MonoBehaviour
 
         gameObject.GetComponent<Animator>().SetBool("Die", true);
         //Restart the level 
-        //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        //Destroy(gameObject);
+
+        //Cambiar de personatge automaticament
+
+        //switchCh.changeChar(1);
+
+
+
+
 
     }
 

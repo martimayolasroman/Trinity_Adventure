@@ -42,8 +42,8 @@ public class Switch_Character : MonoBehaviour {
         MarcoArcher2.gameObject.SetActive(false);
         MarcoFighter2.gameObject.SetActive(false);
     }
-
-    private void changeChar(int n)
+    
+    public void changeChar(int n)
     {
         //Task.Delay(500);
         if (n > 2) n = 0;
