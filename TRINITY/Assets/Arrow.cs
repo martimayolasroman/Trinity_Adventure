@@ -24,5 +24,10 @@ public class Arrow : MonoBehaviour
             hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
             hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
         }
+        if (hitInfo.collider.CompareTag("ground"))
+        {
+            //Si colisiona conta el terra destruir arrow
+            //Object.Destroy();
+        }
     }
 }

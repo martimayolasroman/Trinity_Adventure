@@ -18,12 +18,15 @@ public class ninja : MonoBehaviour
     public float attackRange;
     public int damage;
     public float distance;
-
+    public Collider2D attackTrigguerLeft;
+    public Collider2D attackTrigguerRight;
 
     // Start is called before the first frame update
     void Start()
     {
         //GetComponent<ScriptName>().miau();
+        attackTrigguerLeft.enabled = false;
+        attackTrigguerRight.enabled = false;
     }
 
     // Update is called once per frame
@@ -123,25 +126,31 @@ public class ninja : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                if (hitInfo.collider.CompareTag("Enemy"))
-                {
-                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                }
+
+
+                //RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                //if (hitInfo.collider.CompareTag("Enemy"))
+                //{
+                //    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                //    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                //    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                //}
+                attackTrigguerLeft.enabled = true;
+                attackTrigguerRight.enabled = true;
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                if (hitInfo.collider.CompareTag("Enemy"))
-                {
-                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                }
+                //RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
+                //if (hitInfo.collider.CompareTag("Enemy"))
+                //{
+                //    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+                //    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+                //    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+                //}
+                attackTrigguerLeft.enabled = true;
+                attackTrigguerRight.enabled = true;
 
             }
             TimeAttack = StartTimeAttack;
@@ -156,6 +165,8 @@ public class ninja : MonoBehaviour
 
             isatak = false;
             jumpatak = false;
+            attackTrigguerLeft.enabled = false;
+            attackTrigguerRight.enabled = false;
 
 
         }
@@ -178,12 +189,12 @@ public class ninja : MonoBehaviour
         }
     }
 
-        private void OnDrawGizmosSelected()
+        //private void OnDrawGizmosSelected()
 
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackPos.position, attackRange);
-        }
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        //}
 
     
 
