@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         if (health > numOfHearts) { health = numOfHearts; }
         if (health == 0)
         {
-            Die();
+           // Die();
         }
         for (int i=0; i < hearts.Length; i++)
         {
@@ -47,15 +47,15 @@ public class Health : MonoBehaviour
         
     }
 
-    void Die()
-    {
+    //void Die()
+    //{
         
-        gameObject.GetComponent<Animator>().SetBool("Die", true);
-        //Restart the level 
-        //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+    //    gameObject.GetComponent<Animator>().SetBool("Die", true);
+    //    //Restart the level 
+    //    //UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    //    Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
 
-    }
+    //}
 
     public void Damage(int dmg)
     {

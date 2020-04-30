@@ -21,7 +21,7 @@ public class ninja : MonoBehaviour
     public float distance;
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
-    Switch_Character switchCh;
+    //Switch_Character switchCh;
 
 
     // LIFE
@@ -31,12 +31,13 @@ public class ninja : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite EmptyHeart;
-    public float delay = -0.1f;
-
+    public float delay = 0;
+    private Shake shake;
     // Start is called before the first frame update
     void Start()
     {
-        switchCh = gameObject.GetComponent<Switch_Character>();
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        //switchCh = gameObject.GetComponent<Switch_Character>();
 
         health = numOfHearts;
         //GetComponent<ScriptName>().miau();
@@ -110,21 +111,6 @@ public class ninja : MonoBehaviour
         if (jumpatak) { gameObject.GetComponent<Animator>().SetBool("jumpatak", true); }
         else gameObject.GetComponent<Animator>().SetBool("jumpatak", false);
 
-
-        /*  if (Input.GetKey("space") && Input.GetKey("d") && canJump)
-          {
-              canJump = false;
-              gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,300f));
-              gameObject.GetComponent<Animator>().SetBool("jump", true);
-              gameObject.GetComponent<SpriteRenderer>().flipX = false;
-          }
-          if (Input.GetKey("space") && Input.GetKey("a") && canJump)
-          {
-              canJump = false;
-              gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
-              gameObject.GetComponent<Animator>().SetBool("jump", true);
-              gameObject.GetComponent<SpriteRenderer>().flipX = true;
-          }*/
 
 
         if (animationjump == true && isatak == true)
@@ -230,14 +216,11 @@ public class ninja : MonoBehaviour
 
         //switchCh.changeChar(1);
 
-
-
-
-
     }
 
     public void Damage(int dmg)
     {
+        shake.CamShake();
         health -= dmg;
     }
 

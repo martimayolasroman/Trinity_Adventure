@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Arquero : MonoBehaviour
 {
@@ -13,9 +14,22 @@ public class Arquero : MonoBehaviour
     private float TimeAttack;
     public float StartTimeAttack;
 
+    // LIFE
+
+    public int health;
+    public int numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite EmptyHeart;
+    public float delay = 0f;
+    private Shake shake;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         //GetComponent<ScriptName>().miau();
     }
 
@@ -135,7 +149,31 @@ public class Arquero : MonoBehaviour
 
 
         }
-        
+
+        //health
+
+        if (health > numOfHearts) { health = numOfHearts; }
+        if (health == 0)
+        {
+            Die();
+        }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = EmptyHeart;
+            }
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else { hearts[i].enabled = false; }
+        }
+
 
     }
 
@@ -149,6 +187,27 @@ public class Arquero : MonoBehaviour
             animationjump = false;
         }
 
+    }
+
+    void Die()
+    {
+
+        gameObject.GetComponent<Animator>().SetBool("Die", true);
+        //Restart the level 
+        Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        //Destroy(gameObject);
+
+        //Cambiar de personatge automaticament
+
+        //switchCh.changeChar(1);
+
+    }
+
+    public void Damage(int dmg)
+    {
+        shake.CamShake();
+        health -= dmg;
     }
 }
 

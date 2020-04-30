@@ -15,22 +15,34 @@ public class BeeFollowPlayer : MonoBehaviour
     public GameObject bullet;
     public GameObject bulletParent;
     public int health;
-    
+    public GameObject bloodEffect;
+    private ninja life;
+    int dmg = 1;
+    public LayerMask players;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         Players = GameObject.FindGameObjectWithTag("Players").transform;
+      //  life = GameObject.FindGameObjectWithTag("Players").GetComponent<ninja>();
 
-        
     }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Players"))
+        {
 
+            collision.SendMessageUpwards("Damage", dmg);
+        }
+
+    }
     // Update is called once per frame
     void Update()
         
     {
-
 
         if (health <= 0)
         {
@@ -77,10 +89,11 @@ public class BeeFollowPlayer : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         Debug.Log(damage);
         Debug.Log(health);
         health -= damage;
-        Debug.Log("damage TaKEN BEE!");
+        Debug.Log("damage TaKEN !");
 
     }
 }

@@ -20,10 +20,16 @@ public class Arrow : MonoBehaviour
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, distance, whatIsEnemies);
         if (hitInfo.collider.CompareTag("Enemy"))
         {
-            hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-            hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+            //hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
             hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+            
+                hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+            
+          
+                hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
+            
         }
+
         if (hitInfo.collider.CompareTag("ground"))
         {
             //Si colisiona conta el terra destruir arrow

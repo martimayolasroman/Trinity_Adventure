@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fighter : MonoBehaviour
 {
@@ -20,12 +21,29 @@ public class Fighter : MonoBehaviour
     public LayerMask whatIsEnemies;
     public float attackRange;
     public int damage;
+    public Collider2D attackTrigguerLeft;
+    public Collider2D attackTrigguerRight;
+    // LIFE
 
-    
+    public int health;
+    public int numOfHearts;
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite EmptyHeart;
+    public float delay = 0;
+    private Shake shake;
+
 
     // Start is called before the first frame update
-  public  void Start()
+    public  void Start()
     {
+        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        //switchCh = gameObject.GetComponent<Switch_Character>();
+
+        health = numOfHearts;
+        //GetComponent<ScriptName>().miau();
+        attackTrigguerLeft.enabled = false;
+        attackTrigguerRight.enabled = false;
         //GetComponent<ScriptName>().miau();
     }
 
@@ -123,41 +141,18 @@ public class Fighter : MonoBehaviour
             if (!canJump && Input.GetKey(KeyCode.Mouse0))
             {
                 jumpatak = true;
-                TimeAttack = StartTimeAttack;
-                //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                //for (int i = 0; i < enemiesToDamage.Length; i++)
-                //{
-                //    enemiesToDamage[i].GetComponent<Enemy_behaviour >().TakeDamage(damage);
-                //    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                //}
-                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                if (hitInfo.collider.CompareTag("Enemy"))
-                {
-                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                }
+
+                attackTrigguerLeft.enabled = true;
+                attackTrigguerRight.enabled = true;
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-                // gameObject.GetComponent<SpriteRenderer>().flipX = false;
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                //for (int i = 0; i < enemiesToDamage.Length; i++)
-                //{
-                //    enemiesToDamage[i].GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                //    enemiesToDamage[i].GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                //}
 
-                RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, transform.up, attackRange, whatIsEnemies);
-                if (hitInfo.collider.CompareTag("Enemy"))
-                {
-                    hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<Ghost>().TakeDamage(damage);
-                    hitInfo.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
-                }
-
+                
+                attackTrigguerLeft.enabled = true;
+                attackTrigguerRight.enabled = true;
 
 
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -177,12 +172,39 @@ public class Fighter : MonoBehaviour
 
             isatak = false;
             jumpatak = false;
+            attackTrigguerLeft.enabled = false;
+            attackTrigguerRight.enabled = false;
+
 
 
         }
         if (!canJump && !jumpatak)
         {
             animationjump = true;
+        }
+
+        //health
+
+        if (health > numOfHearts) { health = numOfHearts; }
+        if (health == 0)
+        {
+            Die();
+        }
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < health)
+            {
+                hearts[i].sprite = fullHeart;
+            }
+            else
+            {
+                hearts[i].sprite = EmptyHeart;
+            }
+            if (i < numOfHearts)
+            {
+                hearts[i].enabled = true;
+            }
+            else { hearts[i].enabled = false; }
         }
     }
 
@@ -199,10 +221,27 @@ public class Fighter : MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
+   
 
+    void Die()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+
+        //gameObject.GetComponent<Animator>().SetBool("Die", true);
+        //Restart the level 
+       // Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        //Destroy(gameObject);
+
+        //Cambiar de personatge automaticament
+
+        //switchCh.changeChar(1);
+
     }
+
+    public void Damage(int dmg)
+    {
+        shake.CamShake();
+        health -= dmg;
+    }
+
 }

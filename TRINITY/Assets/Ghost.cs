@@ -11,19 +11,20 @@ public class Ghost : MonoBehaviour
     private Transform Players;
     public float shootingRange;
     public float fireRate = 1f;
-
+    public GameObject bloodEffect;
     public int health;
-
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
         Players = GameObject.FindGameObjectWithTag("Players").transform;
-
+      
 
     }
 
+  
     // Update is called once per frame
     void Update()
 
@@ -72,10 +73,11 @@ public class Ghost : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Instantiate(bloodEffect, transform.position, Quaternion.identity);
         Debug.Log(damage);
         Debug.Log(health);
         health -= damage;
-        Debug.Log("damage TaKEN BEE!");
+        Debug.Log("damage TaKEN !");
 
     }
 }
