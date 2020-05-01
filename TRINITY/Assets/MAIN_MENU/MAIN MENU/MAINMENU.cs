@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MAINMENU : MonoBehaviour
+{
+    // Start is called before the first frame update
+
+    public GameObject PauseUII;
+
+    public void play()
+    {
+
+    }
+    public void savegame()
+    {
+
+    }
+    public void options()
+    {
+
+    }
+    public void credits()
+    {
+
+    }
+
+    public void exit()
+    {
+        Application.Quit();
+    }
+}
