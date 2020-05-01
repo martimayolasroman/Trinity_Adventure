@@ -14,6 +14,7 @@ public class ColliderNextScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         SceneManager.LoadScene(nextSceneToLoad);
     }
     // Update is called once per frame

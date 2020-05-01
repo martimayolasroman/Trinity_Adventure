@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Fighter : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Fighter : MonoBehaviour
     public int damage;
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
+    public AudioClip jumpClip;
+    public AudioClip atackClip;
+    private AudioSource audioPlayer;
     // LIFE
 
     public int health;
@@ -39,6 +43,8 @@ public class Fighter : MonoBehaviour
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         //switchCh = gameObject.GetComponent<Switch_Character>();
+        audioPlayer = GetComponent<AudioSource>();
+
 
         health = numOfHearts;
         //GetComponent<ScriptName>().miau();
@@ -99,7 +105,8 @@ public class Fighter : MonoBehaviour
             canJump = false;
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
             animationjump = true;
-
+            audioPlayer.clip = jumpClip;
+            audioPlayer.Play();
 
         }
 
@@ -153,6 +160,8 @@ public class Fighter : MonoBehaviour
                 
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
+                audioPlayer.clip = atackClip;
+                audioPlayer.Play();
 
 
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;

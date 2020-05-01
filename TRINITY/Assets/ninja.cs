@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class ninja : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class ninja : MonoBehaviour
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
     //Switch_Character switchCh;
+    public AudioClip jumpClip;
+    public AudioClip atackClip;
+    private AudioSource audioPlayer;
+
 
 
     // LIFE
@@ -38,11 +43,13 @@ public class ninja : MonoBehaviour
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         //switchCh = gameObject.GetComponent<Switch_Character>();
+        audioPlayer = GetComponent<AudioSource>();
 
         health = numOfHearts;
         //GetComponent<ScriptName>().miau();
         attackTrigguerLeft.enabled = false;
         attackTrigguerRight.enabled = false;
+
     }
 
     // Update is called once per frame
@@ -97,7 +104,8 @@ public class ninja : MonoBehaviour
             canJump = false;
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
             animationjump = true;
-
+            audioPlayer.clip = jumpClip;
+            audioPlayer.Play();
 
         }
 
@@ -132,6 +140,7 @@ public class ninja : MonoBehaviour
                 
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
+
             }
 
             if (Input.GetKey(KeyCode.Mouse0))
@@ -140,6 +149,8 @@ public class ninja : MonoBehaviour
                 
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
+                audioPlayer.clip = atackClip;
+                audioPlayer.Play();
 
             }
             TimeAttack = StartTimeAttack;

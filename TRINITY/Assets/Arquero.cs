@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class Arquero : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class Arquero : MonoBehaviour
     public Sprite EmptyHeart;
     public float delay = 0f;
     private Shake shake;
+    public AudioClip jumpClip;
+    public AudioClip atackClip;
+    private AudioSource audioPlayer;
+    
 
 
 
@@ -30,6 +35,7 @@ public class Arquero : MonoBehaviour
     void Start()
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        audioPlayer = GetComponent<AudioSource>();
         //GetComponent<ScriptName>().miau();
     }
 
@@ -85,8 +91,8 @@ public class Arquero : MonoBehaviour
             canJump = false;
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
             animationjump = true;
-
-
+            audioPlayer.clip = jumpClip;
+            audioPlayer.Play();
         }
 
 
@@ -134,6 +140,9 @@ public class Arquero : MonoBehaviour
 
                 // gameObject.GetComponent<SpriteRenderer>().flipX = false;
                 TimeAttack = StartTimeAttack;
+                audioPlayer.clip = atackClip;
+                audioPlayer.Play();
+                
             }
 
         }
