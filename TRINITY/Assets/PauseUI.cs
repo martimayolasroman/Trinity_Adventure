@@ -50,9 +50,9 @@ public class PauseUI : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
-    public void MainMeni()
+    public void MainMenU(string scenename)
     {
-
+        Application.LoadLevel(scenename);
     }
     public void Quit()
     {

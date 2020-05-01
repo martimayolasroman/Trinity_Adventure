@@ -8,9 +8,9 @@ public class MAINMENU : MonoBehaviour
 
     public GameObject PauseUII;
 
-    public void play()
+    public void play(string scenename)
     {
-
+        Application.LoadLevel(scenename);
     }
     public void savegame()
     {
