@@ -33,8 +33,6 @@ public class MouseTurnDirection : MonoBehaviour
 
         
     }
-
-
     void turning()
     {
         Vector3 mousePos = Input.mousePosition;

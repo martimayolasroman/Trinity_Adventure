@@ -8,6 +8,8 @@ TagManager:
   - Players
   - Enemy
   - ScreenShake
+  - SKELETON
+  - BEE
   layers:
   - Default
   - TransparentFX

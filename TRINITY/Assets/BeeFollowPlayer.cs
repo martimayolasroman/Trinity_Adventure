@@ -9,6 +9,7 @@ public class BeeFollowPlayer : MonoBehaviour
     public float speed;
     public float lineofSite;
     private Transform Players;
+    
     public float shootingRange;
     public float fireRate = 1f;
     private float nextFireTime;
@@ -18,7 +19,7 @@ public class BeeFollowPlayer : MonoBehaviour
     public GameObject bloodEffect;
     private ninja life;
     int dmg = 1;
-    public LayerMask players;
+    //public LayerMask players;
 
 
 

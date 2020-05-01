@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SkeletonAttack : MonoBehaviour
 {
-    private ninja life;
+    //private ninja life;
     int dmg = 1;
     
     // Start is called before the first frame update
     void Start()
     {
-        life = GameObject.FindGameObjectWithTag("Players").GetComponent<ninja>();
+       // life = GameObject.FindGameObjectWithTag("Players").GetComponent<ninja>();
         //archer = GameObject.FindGameObjectWithTag("Player").GetComponent<Arquero>();
         //boxer = GameObject.FindGameObjectWithTag("Player").GetComponent<Fighter>();
     }

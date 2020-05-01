@@ -21,7 +21,6 @@ public class Ghost : MonoBehaviour
     {
         Players = GameObject.FindGameObjectWithTag("Players").transform;
       
-
     }
 
   
