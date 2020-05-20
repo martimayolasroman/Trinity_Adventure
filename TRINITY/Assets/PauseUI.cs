@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PauseUI : MonoBehaviour
 {
+
     public GameObject PauseUII;
     private bool paused = false;
-    public GameObject HUDD;
+    private GameObject HUDD;
 
     void Start()
     {
-
+        HUDD = GameObject.FindGameObjectWithTag("HUD");
+        DontDestroyOnLoad(this.gameObject); // no es destruira .
         PauseUII.SetActive(!paused);
 
     }
@@ -18,6 +20,7 @@ public class PauseUI : MonoBehaviour
     void Update()
     {
 
+      
 
 
         if ((Input.GetKeyDown(KeyCode.P))) {
@@ -37,6 +40,7 @@ public class PauseUI : MonoBehaviour
 
             PauseUII.SetActive(false);
             Time.timeScale = 1;
+            HUDD.SetActive(true);
         }
     }
 

@@ -19,7 +19,7 @@ public class Ghost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Players = GameObject.FindGameObjectWithTag("Players").transform;
+        
       
     }
 
@@ -28,7 +28,7 @@ public class Ghost : MonoBehaviour
     void Update()
 
     {
-
+        Players = GameObject.FindGameObjectWithTag("Players").transform;
 
         if (health <= 0)
         {

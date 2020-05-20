@@ -10,6 +10,7 @@ TagManager:
   - ScreenShake
   - SKELETON
   - BEE
+  - HUD
   layers:
   - Default
   - TransparentFX
