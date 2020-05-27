@@ -11,6 +11,7 @@ TagManager:
   - SKELETON
   - BEE
   - HUD
+  - CoordenadesPlayers
   layers:
   - Default
   - TransparentFX

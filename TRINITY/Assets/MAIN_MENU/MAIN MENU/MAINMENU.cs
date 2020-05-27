@@ -12,7 +12,7 @@ public class MAINMENU : MonoBehaviour
     {
         Application.LoadLevel(scenename);
     }
-    public void savegame()
+public void savegame()
     {
 
     }
@@ -25,6 +25,7 @@ public class MAINMENU : MonoBehaviour
 
     }
 
+  
     public void exit()
     {
         Application.Quit();

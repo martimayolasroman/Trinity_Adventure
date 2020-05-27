@@ -14,6 +14,7 @@ public class Arquero : MonoBehaviour
 
     private float TimeAttack;
     public float StartTimeAttack;
+    public GameObject arrow;
 
     // LIFE
 
@@ -36,6 +37,7 @@ public class Arquero : MonoBehaviour
     {
         shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         audioPlayer = GetComponent<AudioSource>();
+        arrow.SetActive(false);
         //GetComponent<ScriptName>().miau();
     }
 
@@ -44,6 +46,7 @@ public class Arquero : MonoBehaviour
     {
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
         //GetComponentInParent<Transform>().transform.position = transform.position;
+
         if (Input.GetKey("a"))
         {
 
@@ -58,6 +61,7 @@ public class Arquero : MonoBehaviour
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
                 gameObject.GetComponent<Animator>().SetBool("moving", false); //posar animacio menters corre i ataka
+
 
             }
         }
@@ -75,6 +79,9 @@ public class Arquero : MonoBehaviour
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
                 gameObject.GetComponent<Animator>().SetBool("moving", false);
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+
+
 
             }
         }
@@ -99,7 +106,8 @@ public class Arquero : MonoBehaviour
         if (animationjump ) { gameObject.GetComponent<Animator>().SetBool("jump", true); }
         else gameObject.GetComponent<Animator>().SetBool("jump", false);
 
-        if (isatak ) { gameObject.GetComponent<Animator>().SetBool("attack", true); }
+        if (isatak ) { gameObject.GetComponent<Animator>().SetBool("attack", true); arrow.SetActive(true);
+        }
         else gameObject.GetComponent<Animator>().SetBool("attack", false);
 
         
