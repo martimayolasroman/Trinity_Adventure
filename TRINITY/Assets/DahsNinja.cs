@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DentedPixel;
 
 public class DahsNinja : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class DahsNinja : MonoBehaviour
     private float moveInput;
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
+    //cooldown
+    public GameObject bar;
+    public int time;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -36,21 +41,26 @@ public class DahsNinja : MonoBehaviour
             if (Time.time > nextDashTIme)
             {
 
-            
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if(moveInput < 0)
+
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    direction = 1;
+                    if (moveInput < 0)
+                    {
+                        direction = 1;
                         nextDashTIme = Time.time + cooldownTime;
+                        cooldownninja();
                     }
-                    else if(moveInput >0)
-                {
-                    direction = 2;
+                    else if (moveInput > 0)
+                    {
+                        direction = 2;
                         nextDashTIme = Time.time + cooldownTime;
+                        cooldownninja();
                     }
 
-            }
+
+    
+
+                   }               
 
             }
 
@@ -102,4 +112,12 @@ public class DahsNinja : MonoBehaviour
 
        }
        */
+     void cooldownninja()
+    {
+        LeanTween.scaleX(bar, 0, 0);
+        // Transform.localScale.x = 0f;
+        LeanTween.scaleX(bar, 1, time);
+
+    }
+
 }

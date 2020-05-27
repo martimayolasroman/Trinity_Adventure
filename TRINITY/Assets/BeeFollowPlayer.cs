@@ -27,7 +27,6 @@ public class BeeFollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Players = GameObject.FindGameObjectWithTag("Players").transform;
       //  life = GameObject.FindGameObjectWithTag("Players").GetComponent<ninja>();
 
     }
@@ -44,6 +43,8 @@ public class BeeFollowPlayer : MonoBehaviour
     void Update()
         
     {
+        Players = GameObject.FindGameObjectWithTag("Players").transform;
+
 
         if (health <= 0)
         {

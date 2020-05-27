@@ -7,6 +7,7 @@ public class PauseUI : MonoBehaviour
 
     public GameObject PauseUII;
     private bool paused = false;
+    public GameObject arrow;
     private GameObject HUDD;
 
     void Start()
@@ -20,7 +21,8 @@ public class PauseUI : MonoBehaviour
     void Update()
     {
 
-      
+
+     
 
 
         if ((Input.GetKeyDown(KeyCode.P))) {
@@ -33,6 +35,7 @@ public class PauseUI : MonoBehaviour
             PauseUII.SetActive(true);
             Time.timeScale = 0;
             HUDD.SetActive(false);
+            arrow.SetActive(false);
 
         }
         if (!paused)

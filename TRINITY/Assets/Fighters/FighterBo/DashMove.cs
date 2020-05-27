@@ -11,6 +11,11 @@ public class DashMove : MonoBehaviour
     private int direction;
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
+
+    //cooldown
+    public GameObject bar;
+    public int time;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -48,7 +53,7 @@ public class DashMove : MonoBehaviour
             {
                 direction = 0;
                 dashTime = startDashTime;
-                rb.velocity = Vector2.zero;
+                              rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Animator>().SetBool("dash", false);
 
             }
@@ -56,7 +61,7 @@ public class DashMove : MonoBehaviour
             {
                 dashTime -= Time.deltaTime;
                 gameObject.GetComponent<Animator>().SetBool("dash", true);
-
+                cooldownfighter();
 
                 if (direction == 1)
                 {
@@ -83,6 +88,13 @@ public class DashMove : MonoBehaviour
       
     }
 
+    void cooldownfighter()
+    {
+        LeanTween.scaleX(bar, 0, 0);
+        // Transform.localScale.x = 0f;
+        LeanTween.scaleX(bar, 1, time);
+
+    }
 
 
     /* // Start is called before the first frame update
