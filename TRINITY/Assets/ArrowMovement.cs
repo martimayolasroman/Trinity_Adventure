@@ -9,12 +9,20 @@ public class ArrowMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
+    private void Collision2D(Collision collision)
+    {
+
+        if (collision.gameObject.tag == "SKELETON" || collision.gameObject.tag == "Enemy")
+        {
+
+            Debug.Log("XOCA: ");
+        }
     }
 }

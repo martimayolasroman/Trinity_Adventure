@@ -13,13 +13,20 @@ public class CooldownBar : MonoBehaviour
     void Start()
     {
 
-        LeanTween.scaleX(bar, 1, time);
-        
+        cooldown();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void cooldown()
+    {
+        LeanTween.scaleX(bar, 1, time);
+
     }
 }
