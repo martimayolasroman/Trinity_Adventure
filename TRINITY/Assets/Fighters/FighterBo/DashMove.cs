@@ -8,58 +8,57 @@ public class DashMove : MonoBehaviour
     public float dashSpeed;
     private float dashTime;
     public float startDashTime;
-    private int direction;
+    private bool jump;
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
-
-    public AudioClip megajumpClip;
-    private AudioSource AudioPlayer;
 
     //cooldown
     public GameObject bar;
     public int time;
-
+    public float movementVelocity;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        AudioPlayer = GetComponent<AudioSource>();
         dashTime = startDashTime;
-
+        jump = false;
     }
 
     private void Update()
     {
-        if (direction == 0){
-            //if (Input.GetKeyDown(KeyCode.A))
-            //{
-            //    direction = 1;
-            //}
-            //else if (Input.GetKeyDown(KeyCode.D))
-            //{
-            //    direction = 2;
-            //}
-           if(Time.time > nextDashTIme) { 
-           if (Input.GetKeyDown(KeyCode.E))
+        if (jump == false)
+        {
+
+            if (Input.GetKey("d"))
             {
-                    AudioPlayer.clip = megajumpClip;
-                    AudioPlayer.Play();
-                direction = 3;
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementVelocity * Time.deltaTime, 0);
+
+            }
+            if (Input.GetKey("a"))
+            {
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-movementVelocity * Time.deltaTime, 0);
+
+            }
+            if (Time.time > nextDashTIme)
+            {
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    jump = true;
                     nextDashTIme = Time.time + cooldownTime;
+                }
             }
-            }
-            //else if (Input.GetKeyDown(KeyCode.S))
-            //{
-            //    direction = 4;
-            //}
+
 
         }
         else
         {
             if (dashTime <= 0)
             {
-                direction = 0;
+                jump = false; ;
                 dashTime = startDashTime;
-                              rb.velocity = Vector2.zero;
+                rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Animator>().SetBool("dash", false);
 
             }
@@ -69,29 +68,16 @@ public class DashMove : MonoBehaviour
                 gameObject.GetComponent<Animator>().SetBool("dash", true);
                 cooldownfighter();
 
-                if (direction == 1)
-                {
-                    rb.velocity = Vector2.left * dashSpeed;
 
-                }
-                else if (direction == 2)
-                {
-                    rb.velocity = Vector2.right * dashSpeed;
-
-                }
-                else if (direction == 3)
+                if (jump == true)
                 {
                     rb.velocity = Vector2.up * dashSpeed;
 
                 }
-                else if (direction == 4)
-                {
-                    rb.velocity = Vector2.down * dashSpeed;
 
-                }
             }
         }
-      
+
     }
 
     void cooldownfighter()

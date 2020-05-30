@@ -13,16 +13,13 @@ public class MouseTurnDirection : MonoBehaviour
     public float startDashTime;
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
-
-    public AudioClip ataqueClip;
-    private AudioSource audioPlayer;
+    bool shot = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        audioPlayer = GetComponent<AudioSource>();
         dashTime = startDashTime;
 
     }
@@ -39,8 +36,6 @@ public class MouseTurnDirection : MonoBehaviour
             {
 
                 shoot();
-                audioPlayer.clip = ataqueClip;
-                audioPlayer.Play();
 
             }
         }
@@ -61,13 +56,19 @@ public class MouseTurnDirection : MonoBehaviour
     void shoot()
     {
 
-
+        arrow.transform.gameObject.SetActive(true);
         GameObject projectile = (GameObject)Instantiate(arrow, spawnPoint.transform.position, (Quaternion.identity));
         projectile.transform.right = transform.right;
         nextDashTIme = Time.time + cooldownTime;
 
 
-
     }
 
 }
+
+
+
+
+
+
+
