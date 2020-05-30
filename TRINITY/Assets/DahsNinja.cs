@@ -7,6 +7,7 @@ public class DahsNinja : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float dashSpeed;
+
     private float dashTime;
     public float startDashTime;
     private int direction;
@@ -16,6 +17,7 @@ public class DahsNinja : MonoBehaviour
     //cooldown
     public GameObject bar;
     public int time;
+    public float movementVelocity;
 
     private void Start()
     {
@@ -30,6 +32,18 @@ public class DahsNinja : MonoBehaviour
         moveInput = Input.GetAxis("Horizontal");
         if (direction == 0)
         {
+            if (Input.GetKey("d"))
+            {
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementVelocity * Time.deltaTime, 0);
+
+            }
+            if (Input.GetKey("a"))
+            {
+
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-movementVelocity * Time.deltaTime, 0);
+
+            }
             //if (Input.GetKeyDown(KeyCode.A))
             //{
             //    direction = 1;
@@ -58,9 +72,8 @@ public class DahsNinja : MonoBehaviour
                     }
 
 
-    
 
-                   }               
+                }
 
             }
 
@@ -74,13 +87,15 @@ public class DahsNinja : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 gameObject.GetComponent<Animator>().SetBool("dash", false);
 
+
             }
             else
             {
                 dashTime -= Time.deltaTime;
                 gameObject.GetComponent<Animator>().SetBool("dash", true);
 
-                
+
+
 
                 if (direction == 1)
                 {
@@ -92,7 +107,7 @@ public class DahsNinja : MonoBehaviour
                     rb.velocity = Vector2.right * dashSpeed;
 
                 }
-               
+
             }
         }
 
@@ -112,7 +127,7 @@ public class DahsNinja : MonoBehaviour
 
        }
        */
-     void cooldownninja()
+    void cooldownninja()
     {
         LeanTween.scaleX(bar, 0, 0);
         // Transform.localScale.x = 0f;

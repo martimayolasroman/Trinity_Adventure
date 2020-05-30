@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
     public int damage;
     public float distance;
     public LayerMask whatIsEnemies;
+    public LayerMask whatisground;
 
 
 
@@ -24,6 +25,7 @@ public class Arrow : MonoBehaviour
         {
             //hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
             hitInfo1.collider.GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+          //  Destroy(gameObject);
 
 
         }
@@ -34,6 +36,7 @@ public class Arrow : MonoBehaviour
             //hitInfo.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
 
             hitInfo2.collider.GetComponent<Enemy_behaviour>().TakeDamage(damage);
+          //  Destroy(gameObject);
 
 
         }
@@ -45,15 +48,10 @@ public class Arrow : MonoBehaviour
 
 
             hitInfo3.collider.GetComponent<Ghost>().TakeDamage(damage);
+           // Destroy(gameObject);
 
         }
-
-        if (hitInfo1.collider.CompareTag("ground"))
-        {
-            //Si colisiona conta el terra destruir arrow
-            //Object.Destroy();
-
-        }
+        
 
     }
 }

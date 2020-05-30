@@ -8,14 +8,19 @@ public class MouseTurnDirection : MonoBehaviour
     public GameObject arrow;
     public GameObject spawnPoint;
     public float speed = .5f;
-   
+    bool canshoot;
+    private float dashTime;
+    public float startDashTime;
+    public float cooldownTime = 2;
+    private float nextDashTIme = 0;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        dashTime = startDashTime;
+
     }
 
     // Update is called once per frame
@@ -23,15 +28,17 @@ public class MouseTurnDirection : MonoBehaviour
     {
 
         turning();
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Time.time > nextDashTIme)
         {
 
-            shoot();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
 
+                shoot();
+
+            }
         }
 
-        
     }
     void turning()
     {
@@ -48,9 +55,13 @@ public class MouseTurnDirection : MonoBehaviour
     void shoot()
     {
 
+
         GameObject projectile = (GameObject)Instantiate(arrow, spawnPoint.transform.position, (Quaternion.identity));
         projectile.transform.right = transform.right;
+        nextDashTIme = Time.time + cooldownTime;
+
 
 
     }
+
 }

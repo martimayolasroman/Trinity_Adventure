@@ -14,6 +14,7 @@ public class ninja : MonoBehaviour
     //   ATTACK
 
     private float TimeAttack;
+    public float movementVelocity;
     public float StartTimeAttack;
     public Transform attackPos;
     public LayerMask whatIsEnemies;
@@ -38,6 +39,14 @@ public class ninja : MonoBehaviour
     public Sprite EmptyHeart;
     public float delay = 0;
     private Shake shake;
+    private float current_V;
+    private float facing;
+
+    private float jumpTimer;
+    private float startTime;
+    private bool isJumping;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,63 +58,83 @@ public class ninja : MonoBehaviour
         //GetComponent<ScriptName>().miau();
         attackTrigguerLeft.enabled = false;
         attackTrigguerRight.enabled = false;
+        isJumping = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         GetComponentInParent<Switch_Character>().pos = new Vector2(transform.position.x, transform.position.y);
         //GetComponentInParent<Transform>().transform.position = transform.position;
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") && !Input.GetKey("e"))
         {
+
+
 
             if (isatak == false)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = (new Vector2(-movementVelocity * Time.deltaTime, 0));
                 gameObject.GetComponent<Animator>().SetBool("moving", true);
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
             }
             if (isatak == true)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = (new Vector2(-movementVelocity * Time.deltaTime, 0));
                 gameObject.GetComponent<SpriteRenderer>().flipX = true;
                 gameObject.GetComponent<Animator>().SetBool("moving", false); //posar animacio menters corre i ataka
 
             }
+            current_V = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+
+
         }
 
 
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") && !Input.GetKey("e"))
         {
+
+
             if (isatak == false)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementVelocity * Time.deltaTime, 0);
                 gameObject.GetComponent<Animator>().SetBool("moving", true);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
             if (isatak == true)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(500f * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(movementVelocity * Time.deltaTime, 0);
                 gameObject.GetComponent<Animator>().SetBool("moving", false);
 
             }
+            current_V = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+
         }
+
+
 
         if (!Input.GetKey("a") && !Input.GetKey("d"))
         {
             gameObject.GetComponent<Animator>().SetBool("moving", false);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0f * Time.deltaTime, 0);
 
         }
 
         if (Input.GetKey("space") && canJump)
         {
 
-            canJump = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300f));
+
+
+
+            //gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 30f), ForceMode2D.Impulse);
             animationjump = true;
             audioPlayer.clip = jumpClip;
             audioPlayer.Play();
+
+            canJump = false;
+            isJumping = true;
+            jumpTimer = 0.25f;
 
         }
 
@@ -137,7 +166,7 @@ public class ninja : MonoBehaviour
                 jumpatak = true;
 
 
-                
+
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
 
@@ -146,7 +175,7 @@ public class ninja : MonoBehaviour
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 isatak = true;
-                
+
                 attackTrigguerLeft.enabled = true;
                 attackTrigguerRight.enabled = true;
                 audioPlayer.clip = atackClip;
@@ -198,7 +227,34 @@ public class ninja : MonoBehaviour
             }
             else { hearts[i].enabled = false; }
         }
+        if (isJumping)
+        {
 
+            if (Input.GetKey("d"))
+            {
+
+                facing = 1;
+
+            }
+            if (Input.GetKey("a"))
+            {
+
+                facing = -1;
+
+            }
+            if (!Input.GetKey("a") && !Input.GetKey("d"))
+            {
+
+                facing = 0;
+            }
+
+            gameObject.GetComponent<Rigidbody2D>().velocity = (new Vector2(15f * facing, 17f));
+            jumpTimer -= Time.deltaTime;
+            if (jumpTimer <= 0)
+            {
+                isJumping = false;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -211,8 +267,9 @@ public class ninja : MonoBehaviour
             animationjump = false;
             jumpatak = false;
         }
+
     }
-    
+
 
     void Die()
     {
@@ -236,5 +293,4 @@ public class ninja : MonoBehaviour
     }
 
 }
-
 
