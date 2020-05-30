@@ -26,7 +26,6 @@ public class Arquero : MonoBehaviour
     public float delay = 0f;
     private Shake shake;
     public AudioClip jumpClip;
-    public AudioClip atackClip;
     private AudioSource audioPlayer;
 
 
@@ -144,10 +143,20 @@ public class Arquero : MonoBehaviour
             if (!Input.GetKey("a") && !Input.GetKey("d"))
             {
                 gameObject.GetComponent<Animator>().SetBool("moving", false);
+                gameObject.GetComponent<Rigidbody2D>().velocity= (new Vector2(0, gameObject.GetComponent<Rigidbody2D>().velocity.y));
 
             }
+        
+        if (gameObject.GetComponent<Rigidbody2D>().velocity.x > 7f)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = (new Vector2(7f, gameObject.GetComponent<Rigidbody2D>().velocity.y));
+        }
+        if (gameObject.GetComponent<Rigidbody2D>().velocity.x < -7f)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = (new Vector2(-7f, gameObject.GetComponent<Rigidbody2D>().velocity.y));
+        }
 
-            if (Input.GetKey("space") && canJump)
+        if (Input.GetKey("space") && canJump)
             {
 
                 canJump = false;
@@ -203,8 +212,7 @@ public class Arquero : MonoBehaviour
 
                     // gameObject.GetComponent<SpriteRenderer>().flipX = false;
                     TimeAttack = StartTimeAttack;
-                    audioPlayer.clip = atackClip;
-                    audioPlayer.Play();
+                    
 
                 }
 

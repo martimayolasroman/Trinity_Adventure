@@ -14,11 +14,15 @@ public class MouseTurnDirection : MonoBehaviour
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
 
+    public AudioClip ataqueClip;
+    private AudioSource audioPlayer;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        audioPlayer = GetComponent<AudioSource>();
         dashTime = startDashTime;
 
     }
@@ -35,6 +39,8 @@ public class MouseTurnDirection : MonoBehaviour
             {
 
                 shoot();
+                audioPlayer.clip = ataqueClip;
+                audioPlayer.Play();
 
             }
         }

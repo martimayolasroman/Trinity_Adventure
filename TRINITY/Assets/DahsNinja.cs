@@ -19,10 +19,14 @@ public class DahsNinja : MonoBehaviour
     public int time;
     public float movementVelocity;
 
+    public AudioClip dashClip;
+    private AudioSource audioPlayer;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         dashTime = startDashTime;
+        audioPlayer = GetComponent<AudioSource>();
 
     }
 
@@ -58,14 +62,19 @@ public class DahsNinja : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+  
                     if (moveInput < 0)
                     {
+                        audioPlayer.clip = dashClip;
+                        audioPlayer.Play();
                         direction = 1;
                         nextDashTIme = Time.time + cooldownTime;
                         cooldownninja();
                     }
                     else if (moveInput > 0)
                     {
+                        audioPlayer.clip = dashClip;
+                        audioPlayer.Play();
                         direction = 2;
                         nextDashTIme = Time.time + cooldownTime;
                         cooldownninja();

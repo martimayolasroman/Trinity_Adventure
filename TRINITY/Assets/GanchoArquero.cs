@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Audio;
 
 public class GanchoArquero : MonoBehaviour
 {
@@ -14,10 +15,14 @@ public class GanchoArquero : MonoBehaviour
     public LayerMask mask;
     public float step = 0.02f;
 
+    public AudioClip ganxo;
+    private AudioSource audioPlayer;
+
     // Use this for initialization
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
+        audioPlayer = GetComponent<AudioSource>();
         joint.enabled = false;
         line.enabled = false;
     }
@@ -43,6 +48,7 @@ public class GanchoArquero : MonoBehaviour
 
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, mask);
 
+
             if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
 
             {
@@ -62,7 +68,11 @@ public class GanchoArquero : MonoBehaviour
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, hit.point);
 
-                
+                audioPlayer.clip = ganxo;
+                audioPlayer.Play();
+
+
+
 
 
             }
@@ -73,6 +83,7 @@ public class GanchoArquero : MonoBehaviour
         {
 
             line.SetPosition(0, transform.position);
+
         }
 
 
