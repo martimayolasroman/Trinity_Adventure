@@ -14,7 +14,7 @@ public class ColliderNextScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "CoordenadesPlayers")
+        if (collision.tag == "Players")
         {
             SceneManager.LoadScene(nextSceneToLoad);
         }

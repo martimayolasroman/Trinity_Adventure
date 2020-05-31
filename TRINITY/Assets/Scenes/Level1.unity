@@ -5435,7 +5435,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
+  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
   m_LocalScale: {x: 28.103554, y: 0.97734374, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12538,7 +12538,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201002816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.2, y: -8.94, z: 0}
+  m_LocalPosition: {x: 67.07, y: -6.07, z: 0}
   m_LocalScale: {x: 0.3375, y: 13.623905, z: 1}
   m_Children: []
   m_Father: {fileID: 408625805}
@@ -17834,6 +17834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1675209151}
   - component: {fileID: 1675209152}
+  - component: {fileID: 1675209153}
   m_Layer: 13
   m_Name: DieColider
   m_TagString: ground
@@ -17881,6 +17882,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 81.35396, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1675209153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd189658b5d35348a81ed382b0005c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1678198407
 GameObject:
   m_ObjectHideFlags: 0
@@ -18911,6 +18924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1761713341}
+  - component: {fileID: 1761713342}
   m_Layer: 0
   m_Name: left_Limit
   m_TagString: Untagged
@@ -18932,6 +18946,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1761713342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761713340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd189658b5d35348a81ed382b0005c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1774945279
 GameObject:
   m_ObjectHideFlags: 0
@@ -19651,7 +19677,7 @@ Transform:
   m_GameObject: {fileID: 1869942802}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
+  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1609254985}
