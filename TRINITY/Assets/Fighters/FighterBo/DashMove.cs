@@ -12,6 +12,9 @@ public class DashMove : MonoBehaviour
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
 
+    public AudioClip clipUltimate;
+    private AudioSource audioPlayer;
+
     //cooldown
     public GameObject bar;
     public int time;
@@ -19,6 +22,7 @@ public class DashMove : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioPlayer = GetComponent<AudioSource>();
         dashTime = startDashTime;
         jump = false;
     }
@@ -47,6 +51,9 @@ public class DashMove : MonoBehaviour
                 {
                     jump = true;
                     nextDashTIme = Time.time + cooldownTime;
+                    audioPlayer.clip = clipUltimate;
+                    audioPlayer.Play();
+
                 }
             }
 

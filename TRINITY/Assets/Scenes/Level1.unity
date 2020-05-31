@@ -5435,7 +5435,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
+  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
   m_LocalScale: {x: 28.103554, y: 0.97734374, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8699,6 +8699,7 @@ MonoBehaviour:
   speed: 1
   startDashTime: 0
   cooldownTime: 1.3
+  ultimateArquero: {fileID: 8300000, guid: 765a1b1eb6c394e44a0ff57f4c050efc, type: 3}
 --- !u!82 &838904157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13670,6 +13671,7 @@ MonoBehaviour:
   dashSpeed: 45
   startDashTime: 0.1
   cooldownTime: 2
+  clipUltimate: {fileID: 8300000, guid: 76b7128bd9f78544c849394cbc8b84ec, type: 3}
   bar: {fileID: 232988608}
   time: 2
   movementVelocity: 430
@@ -19649,7 +19651,7 @@ Transform:
   m_GameObject: {fileID: 1869942802}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
+  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1609254985}

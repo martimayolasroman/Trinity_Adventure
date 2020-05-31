@@ -13,6 +13,8 @@ public class MouseTurnDirection : MonoBehaviour
     public float startDashTime;
     public float cooldownTime = 2;
     private float nextDashTIme = 0;
+    public AudioClip ultimateArquero;
+    private AudioSource audioPlayer;
     bool shot = false;
 
 
@@ -21,6 +23,7 @@ public class MouseTurnDirection : MonoBehaviour
     void Start()
     {
         dashTime = startDashTime;
+        audioPlayer = GetComponent<AudioSource>();
 
     }
 
@@ -36,7 +39,8 @@ public class MouseTurnDirection : MonoBehaviour
             {
 
                 shoot();
-
+                audioPlayer.clip = ultimateArquero;
+                audioPlayer.Play();
             }
         }
 
