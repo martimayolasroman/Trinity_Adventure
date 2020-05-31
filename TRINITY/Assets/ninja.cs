@@ -26,6 +26,7 @@ public class ninja : MonoBehaviour
     //Switch_Character switchCh;
     public AudioClip jumpClip;
     public AudioClip atackClip;
+    public AudioClip dmgNinja;
     private AudioSource audioPlayer;
 
 
@@ -288,7 +289,9 @@ public class ninja : MonoBehaviour
 
     public void Damage(int dmg)
     {
-       // shake.CamShake();
+        // shake.CamShake();
+        audioPlayer.clip = dmgNinja;
+        audioPlayer.Play();
         health -= dmg;
     }
 

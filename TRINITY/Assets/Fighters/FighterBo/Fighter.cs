@@ -33,6 +33,7 @@ public class Fighter : MonoBehaviour
     public int damage;
     public Collider2D attackTrigguerLeft;
     public Collider2D attackTrigguerRight;
+    public AudioClip dmgBoxer;
     public AudioClip jumpClip;
     public AudioClip atackClip;
     private AudioSource audioPlayer;
@@ -293,6 +294,8 @@ public class Fighter : MonoBehaviour
 
     public void Damage(int dmg)
     {
+        audioPlayer.clip = dmgBoxer;
+        audioPlayer.Play();
         shake.CamShake();
         health -= dmg;
     }
