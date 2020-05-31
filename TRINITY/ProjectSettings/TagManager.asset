@@ -12,6 +12,7 @@ TagManager:
   - BEE
   - HUD
   - CoordenadesPlayers
+  - Boss
   layers:
   - Default
   - TransparentFX

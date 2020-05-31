@@ -288,7 +288,7 @@ public class ninja : MonoBehaviour
 
     public void Damage(int dmg)
     {
-        shake.CamShake();
+       // shake.CamShake();
         health -= dmg;
     }
 
