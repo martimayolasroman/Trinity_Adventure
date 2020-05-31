@@ -5435,7 +5435,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
+  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
   m_LocalScale: {x: 28.103554, y: 0.97734374, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11328,6 +11328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1057863431}
   - component: {fileID: 1057863432}
+  - component: {fileID: 1057863433}
   m_Layer: 13
   m_Name: ColiderGround
   m_TagString: ground
@@ -11375,6 +11376,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 22.542692, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1057863433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057863430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc61a664a1d918848ac86f247ec4887a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Arrow: {fileID: 256984678}
 --- !u!1 &1059867350
 GameObject:
   m_ObjectHideFlags: 0
@@ -19874,7 +19888,7 @@ Transform:
   m_GameObject: {fileID: 1869942802}
   m_LocalRotation: {x: -0.000000109479714, y: -0.0000051628563, z: 0.0000000068514123,
     w: 1}
-  m_LocalPosition: {x: 4.7154284, y: 0.24999757, z: -20.125914}
+  m_LocalPosition: {x: 3.3647642, y: 0.24999754, z: -20.125927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1609254985}
@@ -22813,6 +22827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809669234516342557, guid: 2bb08ec19a4ec0b4793168254d796fdb,
+        type: 3}
+      propertyPath: m_TagString
+      value: Arrow
       objectReference: {fileID: 0}
     - target: {fileID: 7397424799186129491, guid: 2bb08ec19a4ec0b4793168254d796fdb,
         type: 3}
