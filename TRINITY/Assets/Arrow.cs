@@ -63,6 +63,14 @@ public class Arrow : MonoBehaviour
             Debug.Log("Se fue wey");
         }
 
+        RaycastHit2D hitInfo5 = Physics2D.Raycast(transform.position, transform.up, distance, whatIsEnemies);
+        if (hitInfo5.collider.CompareTag("Boss"))
+        {
+            hitInfo5.collider.GetComponent<BossHealth>().TakeDamage(damage);
+            arrow.transform.gameObject.SetActive(false);
+            Debug.Log("Se fue wey");
+        }
+
     }
 }
 

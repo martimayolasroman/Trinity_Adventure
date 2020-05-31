@@ -34,6 +34,14 @@ public class AttackTriguer : MonoBehaviour
             //GetComponent<Ghost>().TakeDamage(damage);
             //GetComponent<BeeFollowPlayer>().TakeDamage(damage);
         }
+
+        if (collide.isTrigger != true && collide.CompareTag("Boss"))
+        {
+            collide.SendMessageUpwards("TakeDamage", damage);
+
+            //GetComponent<Ghost>().TakeDamage(damage);
+            //GetComponent<BeeFollowPlayer>().TakeDamage(damage);
+        }
     }
     // Start is called before the first frame update
     void Start()

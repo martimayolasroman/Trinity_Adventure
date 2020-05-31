@@ -9,6 +9,7 @@ public class Boss : MonoBehaviour
 
     public bool isFlipped = false;
 
+
     void Start()
     {
 

@@ -36,7 +36,7 @@ public class Arquero : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
+        //shake = GameObject.FindGameObjectWithTag("ScreenShake").GetComponent<Shake>();
         audioPlayer = GetComponent<AudioSource>();
         arrow.SetActive(false);
         //GetComponent<ScriptName>().miau();
@@ -286,7 +286,7 @@ public class Arquero : MonoBehaviour
 
         public void Damage(int dmg)
         {
-            shake.CamShake();
+           // shake.CamShake();
             health -= dmg;
         }
 
