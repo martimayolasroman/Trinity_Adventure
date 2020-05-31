@@ -19,6 +19,9 @@ public class BeeFollowPlayer : MonoBehaviour
     public GameObject bloodEffect;
     private ninja life;
     int dmg = 1;
+
+    public AudioClip dmgBee;
+    private AudioSource audioPlayer;
     //public LayerMask players;
 
 
@@ -27,6 +30,7 @@ public class BeeFollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioPlayer = GetComponent<AudioSource>();
       //  life = GameObject.FindGameObjectWithTag("Players").GetComponent<ninja>();
 
     }
@@ -96,6 +100,8 @@ public class BeeFollowPlayer : MonoBehaviour
         Debug.Log(health);
         health -= damage;
         Debug.Log("damage TaKEN !");
+        audioPlayer.clip = dmgBee;
+        audioPlayer.Play();
 
     }
 }

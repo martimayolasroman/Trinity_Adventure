@@ -16,6 +16,7 @@ public class Enemy_behaviour : MonoBehaviour
     public Transform rightLimit;
     public int health;
     public GameObject bloodEffect;
+    public AudioClip dmgEsqueleton;
     
     #endregion
 
@@ -28,6 +29,7 @@ public class Enemy_behaviour : MonoBehaviour
     private bool inRange; // Check if Plalyer is in range
     private bool cooling; // Check if Enemy is cooling after attack
     private float intTimer;
+    private AudioSource audioPlayer;
     
     #endregion
 
@@ -36,6 +38,7 @@ public class Enemy_behaviour : MonoBehaviour
         SelectTarget();
         intTimer = timer; //Store the initial value fo timer
         anim = GetComponent<Animator>();
+        audioPlayer = GetComponent<AudioSource>();
     }
 
    
@@ -45,8 +48,10 @@ public class Enemy_behaviour : MonoBehaviour
 
         if (health <= 0)
         {
+
             Destroy(gameObject);
-            
+
+
         }
     
 
@@ -221,7 +226,10 @@ public class Enemy_behaviour : MonoBehaviour
         Debug.Log(health);
         health -= damage;
         Debug.Log("damage TaKEN !");
-       
+        audioPlayer.clip = dmgEsqueleton;
+        audioPlayer.Play();
+
+
     }
 
 }

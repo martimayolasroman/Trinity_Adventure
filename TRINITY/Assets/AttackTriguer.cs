@@ -31,6 +31,7 @@ public class AttackTriguer : MonoBehaviour
         {
             collide.SendMessageUpwards("TakeDamage", damage);
 
+
             //GetComponent<Ghost>().TakeDamage(damage);
             //GetComponent<BeeFollowPlayer>().TakeDamage(damage);
         }
@@ -46,7 +47,7 @@ public class AttackTriguer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame

@@ -26,6 +26,7 @@ public class Arquero : MonoBehaviour
     public float delay = 0f;
     private Shake shake;
     public AudioClip jumpClip;
+    public AudioClip dmgPlayer;
     private AudioSource audioPlayer;
 
 
@@ -288,6 +289,8 @@ public class Arquero : MonoBehaviour
         {
            // shake.CamShake();
             health -= dmg;
+        audioPlayer.clip = dmgPlayer;
+        audioPlayer.Play();
         }
 
 

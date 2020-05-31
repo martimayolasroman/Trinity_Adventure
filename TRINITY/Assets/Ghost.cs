@@ -13,13 +13,15 @@ public class Ghost : MonoBehaviour
     public float fireRate = 1f;
     public GameObject bloodEffect;
     public int health;
+    public AudioClip dmgGhost;
+    private AudioSource audioPlayer;
     
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioPlayer = GetComponent<AudioSource>();
       
     }
 
@@ -77,6 +79,8 @@ public class Ghost : MonoBehaviour
         Debug.Log(health);
         health -= damage;
         Debug.Log("damage TaKEN !");
+        audioPlayer.clip = dmgGhost;
+        audioPlayer.Play();
 
     }
 }
