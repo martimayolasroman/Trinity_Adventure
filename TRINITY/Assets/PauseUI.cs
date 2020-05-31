@@ -13,7 +13,6 @@ public class PauseUI : MonoBehaviour
     void Start()
     {
         HUDD = GameObject.FindGameObjectWithTag("HUD");
-        DontDestroyOnLoad(this.gameObject); // no es destruira .
         PauseUII.SetActive(!paused);
 
     }

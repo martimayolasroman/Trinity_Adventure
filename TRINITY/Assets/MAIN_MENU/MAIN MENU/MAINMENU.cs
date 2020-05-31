@@ -17,13 +17,13 @@ public void savegame()
     {
 
     }
-    public void options()
+    public void options(string scenename)
     {
+        Application.LoadLevel(scenename);
 
     }
     public void credits()
     {
-
 
     }
 
